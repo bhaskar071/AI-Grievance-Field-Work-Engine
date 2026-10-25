@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Grievance and Field-Work Engine</title>
-</head>
-<body>
-    <h1>AI Grievance and Field-Work Engine</h1>
-    <p>Grievance management prototype for Digital Amaravati DI-04.</p>
-</body>
-</html>
+{% extends 'base.html' %}{% block title %}Welcome{% endblock %}{% block content %}
+<section class="hero"><div class="eyebrow">DI-04 · Citizen experience & field operations</div><h1>Every grievance deserves<br>a clear path to resolution.</h1><p>A transparent demonstration of AI-assisted issue classification, field-team workflows, SLA monitoring and evidence-backed closure.</p><div class="actions"><a class="btn light" href="{{ url_for('scorecard') }}">Explore public scorecard ↗</a>{% if current_user and current_user.role=='citizen' %}<a class="btn" href="{{ url_for('new_complaint') }}">＋ Report an issue</a>{% elif not current_user %}<a class="btn" href="{{ url_for('register') }}">Get started</a>{% endif %}</div></section>
+<div class="grid" style="margin-bottom:24px"><div class="stat purple"><span>ALL REPORTED</span><strong>{{ stats.total }}</strong></div><div class="stat blue"><span>OPEN WORK</span><strong>{{ stats.open }}</strong></div><div class="stat green"><span>RESOLVED</span><strong>{{ stats.resolved }}</strong></div><div class="stat orange"><span>PAST SLA</span><strong>{{ stats.overdue }}</strong></div></div>
+<div class="grid two"><section class="card"><h2>🧭 Designed for accountability</h2><p class="muted">One workflow connects residents, administrators and field teams.</p><ul><li>Text, image and audio attachment intake</li><li>Transparent rule-based category and priority suggestions</li><li>Location coordinates and crew assignment</li><li>SLA deadlines, work history and resolution evidence</li><li>Public aggregate scorecard with privacy-conscious metrics</li></ul>{% if not current_user %}<a class="btn" href="{{ url_for('register') }}">Create citizen account</a>{% endif %}</section><section class="card"><h2>🕒 Latest reported issues</h2>{% if recent %}{% for c in recent %}<div style="padding:12px 0;border-bottom:1px solid #e2e8f0"><strong>#{{ c.id }} · {{ c.title }}</strong><div class="muted smalltext">{{ c.location_text }} · {{ c.category }} · {{ c.status }}</div></div>{% endfor %}{% else %}<p class="empty">No complaints have been reported yet.</p>{% endif %}<a class="btn secondary" href="{{ url_for('scorecard') }}">View public metrics</a></section></div>
+<div class="card"><h2>How the workflow works</h2><div class="grid"><div><h3>01 · Report</h3><p class="muted">Resident describes the issue and adds a location or evidence.</p></div><div><h3>02 · Triage</h3><p class="muted">Rules suggest a category, urgency and responsible team.</p></div><div><h3>03 · Respond</h3><p class="muted">A field worker updates progress and submits photo evidence.</p></div><div><h3>04 · Verify</h3><p class="muted">An administrator approves or returns the resolution.</p></div></div></div>{% endblock %}
