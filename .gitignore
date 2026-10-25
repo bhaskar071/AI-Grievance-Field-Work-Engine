@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.py[cod]
+grievances.db
+static/uploads/*
+!static/uploads/.gitkeep
+.env
